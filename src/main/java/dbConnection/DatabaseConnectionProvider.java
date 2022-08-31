@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnectionProvider {
 
-    private static final DatabaseConnectionProvider connector = new DatabaseConnectionProvider();
+    private static final DatabaseConnectionProvider CONNECTOR = new DatabaseConnectionProvider();
 
     private Connection connection;
 
@@ -19,13 +19,13 @@ public class DatabaseConnectionProvider {
     }
 
     public static DatabaseConnectionProvider getConnector() {
-        return connector;
+        return CONNECTOR;
     }
 
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventRegister", "root", "root");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/eventRegister?useUnicode=true", "root", "root");
             }
         } catch (SQLException e) {
             e.printStackTrace();
